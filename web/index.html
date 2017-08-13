@@ -1,0 +1,28 @@
+<html>
+
+<head>
+  
+  <style>
+    video {
+      border: 1px dashed black;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>stream-cortex</h1>
+  <p>demo running a realtime video rendering device. direct to webm encoding test <a target="_blank" href="/video">here.</a></p>
+  <video id="video" src="/video" autoplay width="640" height="480" />
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script>
+    if (Hls.isSupported()) {
+      var video = document.getElementById('video');
+      var hls = new Hls();
+      hls.loadSource('/streams/testing/out.m3u8');
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        video.play();
+      });
+    }
+  </script>
+</html>
